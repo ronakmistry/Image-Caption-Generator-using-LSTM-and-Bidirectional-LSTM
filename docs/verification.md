@@ -26,3 +26,7 @@ Browser-based full-page HTML layout review was unavailable because local-file br
 ## Subsequent real-data run
 
 See [hardware-run.md](hardware-run.md) for the completed 15-epoch MobileNet/LSTM run and compiled Metal test results. The original fixture checks above describe the initial restoration pass.
+
+## Corrected continuation
+
+See [improvement-run.md](improvement-run.md) for the CPU/Metal consistency checks, gradient probes, selected epoch-23 model, and validation-selected decoding.

@@ -1,5 +1,7 @@
 # Image caption generation with LSTM and bidirectional LSTM
 
+**Latest local result:** corrected CPU/Metal execution, ten further training epochs, and validation-selected beam search achieved test corpus BLEU-4 **0.1962**. See the [improvement experiment](docs/improvement-run.md) for evidence, commands and comparison limits.
+
 A restored 2018 graduate project by **Abhinav Tiwari, Ronak Mistry, and Shivam Negi**.
 The experiment asks whether bidirectional recurrence improves caption generation enough
 to justify its additional computation, across InceptionV3 and MobileNet image encoders.

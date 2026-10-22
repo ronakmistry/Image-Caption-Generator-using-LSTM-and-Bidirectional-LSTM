@@ -1,5 +1,7 @@
 # Local M5 captioning run
 
+**Historical first run:** the [follow-up experiment](improvement-run.md) resolves the inference disagreement and supersedes this run as the current supported checkpoint. Earlier Metal-only scores are not a directly comparable baseline.
+
 Completed October 21, 2026 (America/New_York) on a MacBook Air with Apple M5,
 10-core CPU, 10-core GPU, and 32 GB unified memory.
 

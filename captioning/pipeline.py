@@ -111,6 +111,17 @@ def predict(artifact_dir, image_path, encoder_weights):
         raise ValueError('Encoder weights do not match training metadata')
     encoder = build_encoder(config['encoder'], encoder_weights)
     feature = np.asarray(encoder(preprocess_image(image_path, config['encoder']), training=False))[0]
+    decoding = metadata.get('decoding', {})
+    if decoding.get('beam_width', 1) > 1:
+        from .decoding import decode
+        model = keras.models.load_model(artifact_dir / 'model.keras')
+
+        @tf.function
+        def infer(features, tokens):
+            return model([features, tokens], training=False)
+
+        return decode(infer, feature[None], metadata['vocabulary'], config['max_len'],
+                      decoding['beam_width'], decoding.get('length_penalty', .6))[0]
     from .evaluation import generate_caption
     return generate_caption(keras.models.load_model(artifact_dir / 'model.keras'), feature,
                             metadata['vocabulary'], config['max_len'])

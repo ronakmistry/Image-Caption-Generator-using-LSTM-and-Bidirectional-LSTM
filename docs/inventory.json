@@ -34,5 +34,14 @@
     "mean_sentence_bleu_1": 0.5574720179750992,
     "corpus_bleu_4": 0.12441307084695447,
     "portability": "CPU/eager predictions differ; unresolved; see docs/hardware-run.md"
+  },
+  "improved_run": {
+    "source": "preserved 15-epoch checkpoint",
+    "additional_epochs": 10,
+    "selected_epoch": 23,
+    "decoding": "beam width 3, length penalty 0.6",
+    "test_corpus_bleu_4": 0.19622453487704067,
+    "cpu_metal_consistency": "verified on controlled probabilities, gradients, and fixed-gallery captions",
+    "report": "docs/improvement-run.md"
   }
 }
