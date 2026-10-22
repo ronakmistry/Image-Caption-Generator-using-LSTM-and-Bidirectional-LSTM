@@ -22,3 +22,7 @@ four projects; per-project locks record their dependency closures. Linux CI is c
 but its result must be checked separately on the PR.
 
 Browser-based full-page HTML layout review was unavailable because local-file browser access was blocked.
+
+## Subsequent real-data run
+
+See [hardware-run.md](hardware-run.md) for the completed 15-epoch MobileNet/LSTM run and compiled Metal test results. The original fixture checks above describe the initial restoration pass.

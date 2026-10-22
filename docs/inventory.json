@@ -25,5 +25,14 @@
     "matplotlib",
     "nltk",
     "tqdm"
-  ]
+  ],
+  "subsequent_real_run": {
+    "variant": "MobileNet/LSTM",
+    "epochs": 15,
+    "data": "Flickr8k official 6000/1000/1000 splits",
+    "runtime": "compiled TensorFlow Metal on Apple M5",
+    "mean_sentence_bleu_1": 0.5574720179750992,
+    "corpus_bleu_4": 0.12441307084695447,
+    "portability": "CPU/eager predictions differ; unresolved; see docs/hardware-run.md"
+  }
 }

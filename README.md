@@ -47,7 +47,7 @@ CI installs the lock, runs fixture tests, executes notebooks, and uploads the re
 
 ## Evidence and preservation
 
-**No real-data reproduction has been performed in this restoration.** Fixture metrics
+**The restoration checks below use fixtures. A subsequent 15-epoch MobileNet/LSTM run on real Flickr8k data is documented in [the M5 run report](docs/hardware-run.md), including an inference portability limitation.** Fixture metrics
 validate code paths only. They do not establish model quality or recover historical results.
 See [verification](docs/verification.md) for checks and limitations, and
 [inventory](docs/inventory.json) for the starting commit, original files, and missing resources.
