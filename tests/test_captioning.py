@@ -54,3 +54,16 @@ def test_full_fixture_round_trip(tmp_path, encoder, variant):
     assert report['image_count'] == 1
     assert np.isfinite(report['history'][0]['train']['loss'])
     assert 'fixture-only' in report['status']
+
+
+def test_epoch_metrics_weight_partial_batches():
+    from captioning.pipeline import train_epoch
+    class BatchModel:
+        def reset_metrics(self):
+            pass
+        def train_on_batch(self, inputs, labels, return_dict):
+            return {'loss': float(np.mean(labels))}
+        test_on_batch = train_on_batch
+    batches = [(None, np.array([1, 3])), (None, np.array([8]))]
+    assert train_epoch(BatchModel(), iter(batches), True)['loss'] == 4
+    assert train_epoch(BatchModel(), iter(batches), False)['loss'] == 4

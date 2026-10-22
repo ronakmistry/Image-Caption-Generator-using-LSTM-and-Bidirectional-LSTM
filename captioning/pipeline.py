@@ -33,13 +33,18 @@ def extract_features(ids, folder, encoder_name, weights):
 
 def train_epoch(model, batch_iterator, training):
     model.reset_metrics()
-    metrics = None
+    totals, count = {}, 0
     for inputs, labels in batch_iterator:
         call = model.train_on_batch if training else model.test_on_batch
         metrics = call(inputs, labels, return_dict=True)
-    if metrics is None:
+        # Keras 3 resets its metric trackers inside each *_on_batch call.
+        size = len(labels)
+        for name, value in metrics.items():
+            totals[name] = totals.get(name, 0.0) + float(value) * size
+        count += size
+    if not count:
         raise ValueError('No caption-prefix examples available')
-    return {name: float(value) for name, value in metrics.items()}
+    return {name: total / count for name, total in totals.items()}
 
 
 def run(output='artifacts/smoke', encoder='mobilenet', variant='lstm', smoke=True,
