@@ -1,0 +1,29 @@
+{
+  "starting_commit": "1aa1a3e45c9a0dbc21a0510576e3356f9a880f9d",
+  "original_files": [
+    "Image_Captioning.ipynb",
+    "LICENSE",
+    "Mobilenet_ImageCap.ipynb",
+    "Readme.pdf",
+    "Tensorflow GPU Setup.pdf"
+  ],
+  "original_environment": "Python 3.6.3; unpinned dependencies; see historical notebooks",
+  "restoration_environment": "Python 3.12",
+  "historical_results": "Notebook conclusions report BLEU around 0.57-0.59; unverified. Wrong-model evaluation invalidates the original MobileNet comparison.",
+  "missing_resources": [
+    "Flickr8k images, captions and official split lists",
+    "ImageNet encoder weights",
+    "trained caption models and their matching vocabularies",
+    "cached features and referenced pics/ diagrams"
+  ],
+  "original_dependencies": [
+    "keras",
+    "tensorflow",
+    "numpy",
+    "pandas",
+    "Pillow",
+    "matplotlib",
+    "nltk",
+    "tqdm"
+  ]
+}
