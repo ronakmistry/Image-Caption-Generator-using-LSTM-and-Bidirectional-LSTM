@@ -1,0 +1,47 @@
+{
+  "starting_commit": "1aa1a3e45c9a0dbc21a0510576e3356f9a880f9d",
+  "original_files": [
+    "Image_Captioning.ipynb",
+    "LICENSE",
+    "Mobilenet_ImageCap.ipynb",
+    "Readme.pdf",
+    "Tensorflow GPU Setup.pdf"
+  ],
+  "original_environment": "Python 3.6.3; unpinned dependencies; see historical notebooks",
+  "restoration_environment": "Python 3.12",
+  "historical_results": "Notebook conclusions report BLEU around 0.57-0.59; unverified. Wrong-model evaluation invalidates the original MobileNet comparison.",
+  "missing_resources": [
+    "Flickr8k images, captions and official split lists",
+    "ImageNet encoder weights",
+    "trained caption models and their matching vocabularies",
+    "cached features and referenced pics/ diagrams"
+  ],
+  "original_dependencies": [
+    "keras",
+    "tensorflow",
+    "numpy",
+    "pandas",
+    "Pillow",
+    "matplotlib",
+    "nltk",
+    "tqdm"
+  ],
+  "subsequent_real_run": {
+    "variant": "MobileNet/LSTM",
+    "epochs": 15,
+    "data": "Flickr8k official 6000/1000/1000 splits",
+    "runtime": "compiled TensorFlow Metal on Apple M5",
+    "mean_sentence_bleu_1": 0.5574720179750992,
+    "corpus_bleu_4": 0.12441307084695447,
+    "portability": "CPU/eager predictions differ; unresolved; see docs/hardware-run.md"
+  },
+  "improved_run": {
+    "source": "preserved 15-epoch checkpoint",
+    "additional_epochs": 10,
+    "selected_epoch": 23,
+    "decoding": "beam width 3, length penalty 0.6",
+    "test_corpus_bleu_4": 0.19622453487704067,
+    "cpu_metal_consistency": "verified on controlled probabilities, gradients, and fixed-gallery captions",
+    "report": "docs/improvement-run.md"
+  }
+}
