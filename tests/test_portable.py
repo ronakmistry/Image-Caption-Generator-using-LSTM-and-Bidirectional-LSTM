@@ -35,3 +35,26 @@ def test_gathered_gradient_matches_reference():
         return [tf.convert_to_tensor(g).numpy() for g in tape.gradient(loss, model.trainable_variables)]
     for expected, actual in zip(gradients(reference), gradients(candidate)):
         np.testing.assert_allclose(expected, actual, atol=1e-6)
+
+
+def test_portable_blstm_matches_masked_reference_and_roundtrips(tmp_path):
+    keras.utils.set_random_seed(19)
+    reference = build_decoder(4, 9, 5, bidirectional=True, units=3, embedding_dim=4)
+    candidate = gathered_clone(reference)
+    inputs = [tf.ones((3, 4)), tf.constant([[2, 0, 0, 0, 0], [2, 4, 0, 0, 0], [2, 4, 5, 6, 0]])]
+    def outputs_and_gradients(model):
+        with tf.GradientTape() as tape:
+            result = model(inputs, training=False)
+            loss = tf.reduce_mean(keras.losses.sparse_categorical_crossentropy(tf.constant([4, 5, 3]), result))
+        gradients = [tf.convert_to_tensor(g).numpy() for g in tape.gradient(loss, model.trainable_variables)]
+        return result.numpy(), gradients
+    expected, expected_gradients = outputs_and_gradients(reference)
+    actual, actual_gradients = outputs_and_gradients(candidate)
+    np.testing.assert_allclose(expected, actual, atol=1e-6)
+    for left, right in zip(expected_gradients, actual_gradients):
+        np.testing.assert_allclose(left, right, atol=1e-6)
+    candidate.compile(optimizer='rmsprop', loss='sparse_categorical_crossentropy')
+    assert np.isfinite(candidate.train_on_batch(inputs, np.array([4, 5, 3]), return_dict=True)['loss'])
+    candidate.save(tmp_path / 'blstm.keras')
+    restored = keras.models.load_model(tmp_path / 'blstm.keras')
+    np.testing.assert_allclose(candidate(inputs), restored(inputs), atol=1e-6)

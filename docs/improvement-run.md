@@ -58,6 +58,8 @@ shapes. On controlled variable-length inputs, corrected forward probabilities an
 This is targeted validation for the current decoder and environment, not a claim about
 all TensorFlow models or all Metal versions. The wrapper is for right-padded,
 unidirectional, nonempty caption prefixes; BLSTM acceleration is not validated here.
+The subsequent [smaller BLSTM comparison](blstm-comparison.md) has separate portability
+checks and validation results.
 
 The old 15-epoch weights were preserved and used as the starting point, with optimizer
 state copied without altering parameter ordering. Corrected execution initially exposed
